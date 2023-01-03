@@ -5,8 +5,7 @@
     <title>TD1</title>
 </head>
 <body>
-    <h4> TD1 </h4>
-
+    <h2> TD1 </h2>
 
     <script>
         var options = {
@@ -17,14 +16,10 @@
 
         function success(pos) {
             var crd = pos.coords;
-
             var today = new Date();
-            //var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             var timestamp = Date.now()
             var date = new Date(timestamp)
-
             var vitesse = pos.speed
-
 
             console.log('Votre position actuelle est :');
             console.log(`Latitude : ${crd.latitude}`);
@@ -41,7 +36,6 @@
             console.warn(`ERREUR (${err.code}): ${err.message}`);
         }
 
-
         navigator.geolocation.getCurrentPosition(success, error, options);
 
         function handleMotionEvent(event) {
@@ -57,8 +51,6 @@
         }
 
         window.addEventListener("devicemotion", handleMotionEvent, true);
-
-
 
         if (window.DeviceOrientationEvent) {
             window.addEventListener("deviceorientation", function (event) {
