@@ -21,13 +21,9 @@
             var date = new Date(timestamp)
             var vitesse = pos.speed
 
-            console.log('Votre position actuelle est :');
-            console.log(`Latitude : ${crd.latitude}`);
-            console.log(`Longitude : ${crd.longitude}`);
-            console.log(`La précision est de ${crd.accuracy} mètres.`);
-
             document.getElementById("lat").innerHTML = `Latitude : ${crd.latitude}`;
             document.getElementById("lon").innerHTML = `Longitude : ${crd.longitude}`;
+            document.getElementById("pre").innerHTML = `Précision : ${crd.accuracy}`;
             document.getElementById("vit").innerHTML = `Vitesse : ${vitesse}`;
             document.getElementById("tim").innerHTML = `Date : ${date}`;
         }
@@ -84,6 +80,7 @@
 
     <h2 id="lat"></h2>
     <h2 id="lon"></h2>
+    <h2 id="pre"></h2>
     <h2 id="vit"></h2>
     <h2 id="tim"></h2>
     <br>
