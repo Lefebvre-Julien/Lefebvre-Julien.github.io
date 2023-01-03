@@ -5,22 +5,41 @@
 <title>HTML5 : Géolocalisation</title>
 </head>
 <body>
-    <p id="demo">Cliquer sur le bouton pour voir vos coordonnées:</p>
-    <button onclick="getLocation()">Afficher les coordonnées</button>
+  <h1>Informations GPS</h1>
+  <p>Position :</p>
+  <ul>
+    <li>Longitude : <span id="longitude"></span></li>
+    <li>Latitude : <span id="latitude"></span></li>
+    <li>Altitude : <span id="altitude"></span></li>
+  </ul>
+  <p>Précision de mesure : <span id="accuracy"></span></p>
+  <p>Vitesse : <span id="speed"></span></p>
+  <p>Date : <span id="timestamp"></span></p>
+
     <script>
-    var x=document.getElementById("demo");
-    function getLocation()
-      {
-      if (navigator.geolocation)
-        {
-        navigator.geolocation.getCurrentPosition(showPosition);
-        }
-      else{x.innerHTML="Geolocation n’est pas prise en charge par ce navigateur.";}
-      }
-    function showPosition(position)
-      {
-      x.innerHTML="Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude + "<br>Altitude: " + position.coords.altitude;    
-      }
+    function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    alert("La géolocalisation n'est pas supportée par ce navigateur.");
+  }
+}
+
+function showPosition(position) {
+  document.getElementById("longitude").innerHTML = position.coords.longitude;
+  document.getElementById("latitude").innerHTML = position.coords.latitude;
+  document.getElementById("altitude").innerHTML = position.coords.altitude;
+  document.getElementById("accuracy").innerHTML = position.coords.accuracy;
+  document.getElementById("speed").innerHTML = position.coords.speed;
+  document.getElementById("timestamp").innerHTML = position.timestamp;
+}
+
+getLocation();
+
+let timestamp = position.timestamp;
+let date = new Date(timestamp);
+let formattedDate = date.toLocaleString();
+document.getElementById("timestamp").innerHTML = formattedDate;
     </script>
 </body>
 </html>
