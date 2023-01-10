@@ -1,47 +1,25 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>TD2</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
-    <link rel="stylesheet" href="TD2.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+    <link rel="stylesheet" href="Td2exo1.css"/>
 
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-        crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
 </head>
 
 <body>
-    <h4> TD2 </h4>
+    <h2> TD2 </h2>
 
     <div id="map"></div>
-
-    <script>
-
-        function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-            var R = 6371; // Radius of the earth in km
-            var dLat = deg2rad(lat2 - lat1);  // deg2rad below
-            var dLon = deg2rad(lon2 - lon1);
-            var a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2)
-                ;
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var d = R * c; // Distance in km
-            return d;
-        }
-
-        function deg2rad(deg) {
-            return deg * (Math.PI / 180)
-        }
-
-        var options = {
+<script>
+     var options = {
             enableHighAccuracy: true,
             timeout: 5000,
             maximumAge: 0
@@ -49,77 +27,34 @@
 
         function success(pos) {
             var crd = pos.coords;
-
             var today = new Date();
-            //var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
             var timestamp = Date.now()
-            var date = new Date(timestamp)
-
-            var vitesse = pos.speed
-
-
-
+           
+        
             console.log('Votre position actuelle est :');
             console.log(`Latitude : ${crd.latitude}`);
             console.log(`Longitude : ${crd.longitude}`);
             console.log(`La précision est de ${crd.accuracy} mètres.`);
-
-
+          
             var map = L.map('map').setView([crd.latitude, crd.longitude], 13);
-
+            
             L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             }).addTo(map);
-
-            var marker = L.marker([43.6961, 7.27178]).addTo(map);
-
-            var polygon = L.polygon([
-                [32.2896141, -64.784187],
-                [29.122349, -80.991361],
-                [18.216919, -66.580912],
-
-
-            ], { color: 'red' }).addTo(map);
-
-            var circle = L.circle([crd.latitude, crd.longitude], {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: crd.accuracy
-            }).addTo(map);
-
-            var ligne = L.polyline([
-                [crd.latitude, crd.longitude],
-                [43.296482, 5.36978],
-            ]).addTo(map);
-
-
-            function reqListener() {
-                L.geoJson(JSON.parse(this.response)).addTo(map);
-            }
-            var oReq = new XMLHttpRequest();
-            oReq.addEventListener("load", reqListener);
-            oReq.open("GET", "https://geo.api.gouv.fr/departements/06/communes?fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=geojson&geometry=centre");
-            oReq.send();
-
-            var distanceMarseille = getDistanceFromLatLonInKm(crd.latitude, crd.longitude, 43.296482, 5.36978)
-            console.log(distanceMarseille)
-            document.getElementById("DistMar").innerHTML = `Distance par rapport à marseille : ${distanceMarseille} km`;
         }
 
-        function error(err) {
+            function error(err) {
             console.warn(`ERREUR (${err.code}): ${err.message}`);
         }
 
         navigator.geolocation.getCurrentPosition(success, error, options);
 
+</script>
 
-
-
-
-    </script>
-
-    <h2 id="DistMar"></h2>
+<h2 id="lat"></h2>
+<h2 id="lon"></h2>
+<h2 id="pre"></h2>
+<h2 id="vit"></h2>
+<h2 id="tim"></h2>
 </body>
-
 </html>
