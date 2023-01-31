@@ -103,6 +103,7 @@
                 var Z = 3 * Math.cos(lat) * Math.sin(long)
                 var Y = 3 * Math.sin(lat)
                 const geometryA = new THREE.SphereGeometry(0.02, 32, 32);
+                const texture = new THREE.TextureLoader().load( data[i].flags.png);
                 const materialA = new THREE.MeshBasicMaterial({ color: textu });
                 const orb = new THREE.Mesh(geometryA, materialA);
                 orb.position.set(X, Y, Z);
