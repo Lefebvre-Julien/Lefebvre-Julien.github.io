@@ -25,6 +25,7 @@
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 			import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+           
             
             var options = {
             enableHighAccuracy: true,
@@ -142,25 +143,6 @@
             const data = await response.json();
             return data;
             }
-
-            sphere.position.set(coord[0], coord[1], coord[2])
-
-            let data = await fetchCountries();
-            let countries = [];
-
-            for(let i = 0; i < data.length; i++) {
-              let country = data[i];
-             let lat = country.lat[0];
-               let lon = country.long[1];
-               let coord = convertToCartesian(lat, lon, 1);
-              console.log(data[i].flags.png);
-               let marker = new THREE.SphereGeometry( 0.01, 32, 32 );
-                  let texture = new THREE.TextureLoader().load( data[i].flags.png );
-           let mat2 = new THREE.MeshLambertMaterial({ map: texture });
-           let markerMesh = new THREE.Mesh(geometry, material);
-           scene.add(markerMesh);
-         markerMesh.position.set(coord[0], coord[1], coord[2]);
-}   
 
         function error(err) {
             console.warn(`ERREUR (${err.code}): ${err.message}`);
