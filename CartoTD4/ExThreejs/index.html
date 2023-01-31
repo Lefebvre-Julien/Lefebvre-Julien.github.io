@@ -8,7 +8,8 @@
 		</style>
 	</head>
 	<body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
 
 	<script type="importmap">
@@ -25,9 +26,7 @@
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 			import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-           
-            
-            var options = {
+			var options = {
             enableHighAccuracy: true,
             timeout: 5000,
             maximumAge: 0
@@ -111,7 +110,6 @@
             }
 
             
-
             $.ajax({
                 url: 'https://restcountries.com/v3.1/all?fields=latlng',
                 type: 'GET',
@@ -135,14 +133,11 @@
 
                 renderer.render(scene, camera);
             }
-            animate();
-        }
 
-        export async function fetchCountries() {
-            const response = await fetch('https://restcountries.com/v3.1/all');
-            const data = await response.json();
-            return data;
-            }
+            animate();
+            
+
+        }
 
         function error(err) {
             console.warn(`ERREUR (${err.code}): ${err.message}`);
