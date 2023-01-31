@@ -25,6 +25,9 @@
 			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 			import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+            let data = await fetchCountries();
+            let countries = [];
+
 			export async function fetchCountries() {
             const response = await fetch('https://restcountries.com/v3.1/all');
             const data = await response.json();
