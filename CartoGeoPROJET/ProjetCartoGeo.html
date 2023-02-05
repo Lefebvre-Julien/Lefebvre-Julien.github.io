@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Trouve pays</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        h1,
+        text {
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a{
+            color:darkorange;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="https://threejs.org/build/three.js"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://threejs.org//examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <h1>Trouve-Pays : Quel pays voulez vous afficher ?</h1>
+    <input type="text" id="monpays" value="france"><input type="button" value="Valider" onclick="Function()">
+    <a href="./ProjetCartoGeoQuizz.html">GeoQuizz</a>
+    <text id="erreur"></text>
+    <script>
+
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.TextureLoader().load('deepspace-scaled.jpg');
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(2, 0, 5);
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+
+        const geometry = new THREE.SphereGeometry(3, 32, 32);
+        var material = new THREE.MeshPhongMaterial();
+        material.map = new THREE.TextureLoader().load('8081_earthmap4k.jpg');
+        material.bumpMap = new THREE.TextureLoader().load('8081_earthbump4k.jpg');
+        material.bumpScale = 0.25;
+        material.specularMap = new THREE.TextureLoader().load('8081_earthspec4k.jpg');
+        material.specular = new THREE.Color('grey')
+        const terre = new THREE.Mesh(geometry, material)
+
+        // material.bumpMap = Three.ImageUtils.loadTexture('8081_earthspec4k.jpg');
+        const sphere = new THREE.Mesh(geometry, material);
+        sphere.position.set(0, 0, 0);
+        scene.add(sphere);
+
+        const light = new THREE.AmbientLight(0x404040, 3); // soft white light
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+        scene.add(directionalLight, light);
+
+        function latlontexture(lat, long, textu) {
+            lat = lat * Math.PI / 180
+            long = -long * Math.PI / 180
+            var X = 3 * Math.cos(lat) * Math.cos(long)
+            var Z = 3 * Math.cos(lat) * Math.sin(long)
+            var Y = 3 * Math.sin(lat)
+            const textureA = new THREE.TextureLoader().load(textu)
+
+            const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
+            const material = new THREE.MeshBasicMaterial({ map: textureA });
+            const cube = new THREE.Mesh(geometry, material);
+            cube.position.set(X, Y, Z);
+            scene.add(cube);
+        }
+
+        const animate = function () {
+            requestAnimationFrame(animate);
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        function Function() {
+
+
+            var pays = document.getElementById('monpays').value
+
+            strlnk = 'https://restcountries.com/v3.1/name/' + pays + '?fullText=true';
+
+            if (strlnk == '') {
+                console.log("non")
+            }
+
+            strlnk.concat('On')
+            $.ajax({
+                url: 'https://restcountries.com/v3.1/name/' + pays + '?fullText=true',
+                type: 'GET',
+                dataType: 'json',
+                error: function () {
+                },
+                success: function (data) {
+                    document.getElementById("erreur").innerHTML = "";
+                    console.log(data.length)
+                    for (var i = 0; i < data.length; i++) {
+                        if (pays == "chad") {
+                            latlontexture(data[i].latlng[0], data[i].latlng[1], 'chad.jpg')
+                        }
+                        else if (pays == "brazil") {
+                            latlontexture(data[i].latlng[0], data[i].latlng[1], 'brasil.PNG')
+                        }
+                        else {
+                            latlontexture(data[i].latlng[0], data[i].latlng[1], data[i].flags.svg)
+                        }
+                    }
+                },
+                error: function (data) {
+                    console.log("oups")
+                    document.getElementById("erreur").innerHTML = "Oups ... Le pays n'existe pas ou a été mal orthographié ... \n Attention, le pays doit être écrit en anglais";
+                }
+            });
+        }
+    </script>
+
+
+</body>
+
+</html>
