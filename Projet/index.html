@@ -70,27 +70,15 @@
             }).addTo(map);
             
 
-            var crd = pos.coords;
+           
 
-            const lat = crd.latitude;
-            const long = crd.longitude;
+           var circle = L.circle([crd.latitude, crd.longitude], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: crd.accuracy
+            }).addTo(map);
 
-            function latlon(lat, long) {
-                lat = lat * Math.PI / 180
-                long = -long * Math.PI / 180
-                var X = 3 * Math.cos(lat) * Math.cos(long)
-                var Z = 3 * Math.cos(lat) * Math.sin(long)
-                var Y = 3 * Math.sin(lat)
-
-                const geometryA = new THREE.SphereGeometry(0.05, 32, 32);
-                const textureA = new THREE.TextureLoader().load('./img/texture.jpg');
-                const materialA = new THREE.MeshBasicMaterial({ map: textureA });
-                const orb = new THREE.Mesh(geometryA, materialA);
-                orb.position.set(X, Y, Z);
-                scene.add(orb);
-            }
-
-          
         
             function reqListener() {
                 L.geoJson(JSON.parse(this.response)).addTo(map);
@@ -110,7 +98,7 @@
         navigator.geolocation.getCurrentPosition(success, error, options);
 
     </script>
-
+    
         <h5 id="lat"></h5>
         <h5 id="lon"></h5>
 
