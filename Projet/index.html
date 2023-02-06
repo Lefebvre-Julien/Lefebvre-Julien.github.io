@@ -69,7 +69,7 @@
             }).addTo(map);
             
 
-            var marker = L.marker([43.6961, 7.27178]).addTo(map);
+           
 
            var circle = L.circle([crd.latitude, crd.longitude], {
                 color: 'red',
@@ -84,7 +84,7 @@
             }
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
-            oReq.open("GET", "https://static.data.gouv.fr/resources/monuments-historiques-francais/20150408-163911/monuments.json");
+            oReq.open("GET", "https://geo.api.gouv.fr/departements/06/communes?fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=geojson&geometry=centre");
             oReq.send();
 
          
