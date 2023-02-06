@@ -18,6 +18,8 @@
 
 <body>
     <h2> Département du Var </h2>
+    <input type="text" id="name" name="name" required
+       minlength="4" maxlength="8" size="10">
 
     <div id="map"></div>
 
@@ -98,7 +100,7 @@
         navigator.geolocation.getCurrentPosition(success, error, options);
 
     </script>
-        <h4>Vos coordonées en ce moment même :</h4>
+        <h4>Vos coordonnées en ce moment même :</h4>
         <h5 id="lat"></h5>
         <h5 id="lon"></h5>
 
