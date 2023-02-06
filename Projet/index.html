@@ -87,7 +87,7 @@
             }
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
-            oReq.open("GET", "https://restcountries.com/v3.1/all?fields=latlng");
+            oReq.open("GET", "https://geo.api.gouv.fr/communes/83?fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre");
             oReq.send();
 
          
