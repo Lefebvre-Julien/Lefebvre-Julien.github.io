@@ -78,11 +78,7 @@
                 radius: crd.accuracy
             }).addTo(map);
 
-            var ligne = L.polyline([
-                [43.6961, 7.27178],
-                [43.296482, 5.36978],
-            ]).addTo(map);
-
+        
             function reqListener() {
                 L.geoJson(JSON.parse(this.response)).addTo(map);
             }
@@ -91,9 +87,7 @@
             oReq.open("GET", "https://geo.api.gouv.fr/departements/06/communes?fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=geojson&geometry=centre");
             oReq.send();
 
-            var distanceMarseille = getDistanceFromLatLonInKm(43.6961, 7.27178, 43.296482, 5.36978)
-            console.log(distanceMarseille)
-            document.getElementById("DistMar").innerHTML = `Distance entre Nice et Marseille : ${distanceMarseille} km`;
+         
         }
 
         function error(err) {
