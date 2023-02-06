@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Projet : MapMonument</title>
+    <title>Votre département du Var</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
@@ -18,6 +18,7 @@
 
 <body>
     <h2> MapMonument </h2>
+    <img src="img/logo.png"
 
     <div id="map"></div>
 
@@ -85,7 +86,7 @@
             }
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
-            oReq.open("GET", "https://geo.api.gouv.fr/departements/06/communes?fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=geojson&geometry=centre");
+            oReq.open("GET", "https://geo.api.gouv.fr/departements/83/communes?fields=nom,codesPostaux,mairie&format=json&geometry=centre");
             oReq.send();
 
          
