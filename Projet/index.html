@@ -84,7 +84,7 @@
             }
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
-            oReq.open("GET", "https://www.data.gouv.fr/fr/datasets/r/5e283905-7464-4165-9766-6a0e6b4ea57c?fields=name,longitude,latitude");
+            oReq.open("GET", "https://geo.api.gouv.fr/departements/06/communes?fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=geojson&geometry=centre");
             oReq.send();
 
          
@@ -98,7 +98,9 @@
 
     </script>
 
-    <footer></footer>
+    <footer>
+      <h3>Application réalisée par Julien Lefebvre</h3>
+    </footer>
 </body>
 
 </html>
