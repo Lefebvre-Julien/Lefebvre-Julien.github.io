@@ -54,7 +54,8 @@
             var date = new Date(timestamp)
             var vitesse = pos.speed
 
-
+            document.getElementById("lat").innerHTML = `Latitude : ${crd.latitude}`;
+            document.getElementById("lon").innerHTML = `Longitude : ${crd.longitude}`;
 
             console.log('Votre position actuelle est :');
             console.log(`Latitude : ${crd.latitude}`);
@@ -97,6 +98,9 @@
         navigator.geolocation.getCurrentPosition(success, error, options);
 
     </script>
+
+        <h2 id="lat"></h2>
+        <h2 id="lon"></h2>
 
     <footer>
       <h3>Application réalisée par Julien Lefebvre</h3>
