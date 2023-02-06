@@ -87,7 +87,7 @@
             }
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
-            oReq.open("GET", "https://geo.api.gouv.fr/departements/83/communes?fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=json&geometry=centre");
+            oReq.open("GET", "https://geo.api.gouv.fr/departements/83/communes?fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=geojson&geometry=centre");
             oReq.send();
 
          
