@@ -84,7 +84,7 @@
             }
             var oReq = new XMLHttpRequest();
             oReq.addEventListener("load", reqListener);
-            oReq.open("GET", "https://geo.api.gouv.fr/departements/06/communes?fields=nom,code,codesPostaux,codeDepartement,codeRegion,population&format=geojson&geometry=centre");
+            oReq.open("GET", "https://static.data.gouv.fr/resources/monuments-historiques-francais/20150408-163911/monuments.json");
             oReq.send();
 
          
