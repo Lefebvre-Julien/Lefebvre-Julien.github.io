@@ -71,15 +71,7 @@
 
             var marker = L.marker([43.6961, 7.27178]).addTo(map);
 
-            var polygon = L.polygon([
-                [32.31080120017493, -64.73888306180461],
-                [25.806174136433153, -80.17970850596281],
-                [18.43773252740642, -66.11858302378742],
-
-
-            ], { color: 'red' }).addTo(map);
-
-            var circle = L.circle([crd.latitude, crd.longitude], {
+           var circle = L.circle([crd.latitude, crd.longitude], {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
